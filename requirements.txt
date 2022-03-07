@@ -1,0 +1,9 @@
+flask
+google-cloud-storage
+google-cloud-videointelligence
+scipy.signal
+pandas
+numpy
+matplotlib
+requests
+imgurpython

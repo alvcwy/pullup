@@ -1,0 +1,141 @@
+{% extends "layout.html" %}
+
+{% block title %} - FAQ {% endblock %}
+
+{% block main %}
+<h1>FAQ</h1>
+<h4 style="padding-top: 0px;"">What is RPE?</h4>
+    <p>RPE stands for 'Rate of Perceived Exertion'. RPE ranges from 1-10, with 10 meaning you are physically unable 
+        to do another rep (failure). To maximize <del>strength and hypertrophy</del> gains, it is recommended that most of your sets fall just under failure,
+        for an RPE of 7-9. Visit the 'About' page and watch Jeff Nippard's video for more info. 
+    </p>
+    <figure>
+        <img src="static/RPE_table.png" alt="RPE table">
+        <figcaption>Decoding RPE <a href="https://ievolvefitness.com/2020/06/22/training-intensity-how-hard-should-you-train/">(source)</a></figcaption>
+    </figure>
+
+<h4>I have my estimated RPE. Now what?</h4>
+    <p>If your RPE is below 7, you might not be training hard enough and leaving too many reps in reserve for effective muscle growth. If your RPE is above 9, you might consider leaving one or two more reps in reserve next time to improve recovery.</p>
+    <p>Knowing that velocity loss is correlated with RPE has also helped me better estimate my RPE during sets as well. If I'm ready to stop the set but my reps haven't slowed noticeably, I know I can probably do a few more reps before I reach RPE 8.</p>
+
+    <h4>My last set was definitely a RPE of 10 but your code says it was only a RPE of 6. Why is there such a big difference? </h4>
+    <p>
+        Velocity loss can differ from person to person and is affected by many factors such as the person's condition and the type of exercise. You might have a velocity loss of 20% at RPE 10 while someone else might have a velocity loss of 50% at RPE 10. 
+    </p>
+    <p>
+        This tool is meant to complement your internal feeling of RPE. I used the table below to estimate your RPE from your velocity loss. 
+    </p>
+    <table class="table w-auto">
+        <tr>
+            <th>Velocity loss</th>
+            <th>Estimated RPE</th>
+        </tr>
+        <tr>
+            <td>35%</td>
+            <td>9.5 - 10</td>
+        </tr>
+        <tr>
+            <td>30% - 35%</td>
+            <td>9 - 9.5</td>
+        </tr>
+        <tr>
+            <td>25% - 30%</td>
+            <td>8 - 9</td>
+        </tr>
+        <tr>
+            <td>20% - 25%</td>
+            <td>7.5 - 8</td>
+        </tr>
+        <tr>
+            <td>12% - 20%</td>
+            <td>7 - 7.5</td>
+        </tr>
+        <tr>
+            <td>12%</td>
+            <td>6-7</td>
+        </tr>    
+      </table> 
+    <p style="text-align: center;"><a href="https://www.metric.coach/articles/five-simple-ways-to-start-using-velocity-in-your-training">(source)</a></p>
+
+<h4>What RPE scores are other people getting?</h4>
+    <p>Here's a graph showing the percentage of submissions for each RPE count.</p>
+    <canvas id="rpe_chart" style="width:100%; max-width:600px; margin: 0 auto; padding-bottom: 10px;"></canvas>
+
+<h4>Will this work if I...</h4>
+    <ul>
+        <li><b>Want to analyze my push ups?</b> No, unfortunately Google's Video API cannot detect a person in a push up position, regardless of whether you film from the front/side.</li>
+        <li><b>Want to analyze my muscle ups/dips instead?</b> Probably, any vertical movement where the camera (and Video API) can detect your head should work.</li>
+        <li><b>Film myself from the back?</b> Probably, but since the Video API relies on detecting your ears, eyes and nose position, filming from the front would give better results.</li>
+        <li><b>Use a doorway pull up bar?</b> Probably, make sure to place the camera a bit lower so your face is obscured as little as possible.</li>
+        <li><b>Include holds at the top or bottom of my reps?</b> Maybe. Take a look at the generated graph to see what points the web app looks at.</li>
+        <li><b>Have other people in the background?</b> No, the web app won't know which person to analyze.</li>
+    </ul>
+    <p> Note: I've only tested the cases above with a few videos. For best results: </p>
+    <ul>
+        <li>Make sure you are the only person in the video (cropping the video is fine)</li>
+        <li>Keep the camera steady (on a tripod for instance)</li>
+        <li>Film from the front</li>
+        <li>Perform your reps with an explosive tempo for each concentric (i.e. the part where you pull yourself up) </li>
+    </ul>
+
+<h4>I've followed all the instructions but it still doesn't work. Why don't you write better code?</h4>
+    <p>It might be that usage for Google/Imgur's API services have exceeded the free quota. Otherwise, if you think you've found a bug please let me know.</p>
+
+<h4>Do you store my data?</h4>
+    <p>Your videos are uploaded to a private bucket/folder on Google Cloud for processing and deleted automatically after 1 day.</p>
+
+<!-- Javascript to create graph for RPE counts-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script>
+    var rpe_ranges = ["6 - 7", "7 - 8", "8 - 9", "9 - 9.5", "9.5 - 10"];
+    var counts = {{ counts }};
+    // console.log(counts);
+
+    var total = 0;
+    for (let i = 0; i < counts.length; i++) {
+        total += counts[i];
+    }
+
+    var rpe_percentages = [];
+    for (let i = 0; i < counts.length; i++) {
+        rpe_percentages.push(Math.round(100 * (counts[i] / total)));
+    }
+    // console.log(rpe_percentages);
+
+    new Chart("rpe_chart", {
+        type: "bar",
+        data: {
+            labels: rpe_ranges,
+            datasets: [{
+                data: rpe_percentages,
+                backgroundColor: '#8cd3ff',
+            }]
+        },
+        options: {
+            legend: {display: false},
+            title: {
+                display: true,
+                text: "RPE frequencies",
+            },
+            scales: {
+                yAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "Percentage %",
+                    },
+                    ticks: {
+                        beginAtZero: true,   // minimum value will be 0
+                    }
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                        display: true,
+                        labelString: "RPE value",
+                    }
+                }]
+            }     
+        },
+    });
+</script>
+
+{% endblock %}

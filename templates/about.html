@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %} - About {% endblock %}
+
+{% block main %}
+    <h1>About</h1>
+        <p> Pull Up RPE helps you see if you are training hard enough. It gives you a RPE estimate based on how much slower your last pull up is compared to your first few. </p>
+        <p> Personally, my pull up numbers stalled after reaching sets of 10. 
+            I wanted a better way to estimate if I was training close to failure or not, and came across Jeff Nippard's video (see below) 
+            on using velocity loss to estimate RPE. Jeff uses video editing to determine rep times but after 3 minutes in iMovie I knew
+            this method was probably worse than just using a stopwatch. 
+        </p>
+            
+        <p>Pull Up RPE was built with Python, Flask, Javascript and uses <a href="https://cloud.google.com/video-intelligence">
+            Google's Video Intelligence API</a> to analyze your pull ups.</p>
+
+    <h4>Possible extensions</h4>
+    <ol>
+        <li>Analyze RPE for other bodyweight exercises (jump height? front lever angle?) </li>
+        <li>Fix bug where video player doesn't show on mobile</li>
+        <li>Get a custom domain name (like pullup.fit or pulluprpe.com) </li>
+    </ol>
+
+    <h4>Thanks</h4>
+    <p>Jeff Nippard, for breaking down the science behind RPE. Now that I know better, I always start the day with a set of <a href="https://youtu.be/giH_R5q9250?t=33">sip curls</a>.</p>
+    <div class="youtube-wrap">
+        <div class="youtube-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/deDlhPmT2SY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <p>Dale from Google, for introducing me to <a href="https://youtu.be/i9tjzr1KME0?list=PLIivdWyY5sqLsaG5hNms0D9aZRBE7DHBb">Teachable Machine</a> (no code machine learning!) and Google's Video Intelligence API. I still haven't thought of something to do with Teachable Machine but I'm definitely a fan of how easy it is to get started (can't say the same about Google Cloud ¯\_(ツ)_/¯).</p>
+    <div class="youtube-wrap">
+        <div class="youtube-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/yLrOy2Xedgk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <p>David and the CS50 team at Harvard for the wonderful course. The lectures and problem sets made learning enjoyable and gave me a solid foundation. I really think this is the best way for anyone to start programming.</p>
+    <div class="youtube-wrap">
+        <div class="youtube-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/3oFAJtFE8YU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </div>
+
+    <h4>Check out</h4>
+    <h5 style="padding-top: 10px;"><a href="http://oopsie.ragmats.com/">Oopsie</a></h5>
+    <p>A CS50x project, I took a lot of inspiration here for the website layout and what to include on my website.</p>
+
+    <h5 style="padding-top: 10px;"><a href="https://plsaskme.com/">Pls Ask Me</a></h5>
+    <p>Another CS50x project, I really liked the simple layout and how easy it is to use.</p>
+{% endblock %}

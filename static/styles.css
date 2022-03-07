@@ -1,0 +1,75 @@
+figure {
+    /* align gif/images to center */
+    text-align: center;
+}
+
+table {
+    /* so table doesn't stretch to fill screen */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+h1 {
+    padding-bottom: 10px;
+}
+
+h4 {
+    padding-top: 20px;
+}
+
+h5 {
+    padding-top: 5px;
+}
+
+.nav-item {
+    font-size: large;
+}
+
+input {
+    display: block;
+}
+
+#graph {
+    max-width: 100%;
+    height: auto;
+}
+
+video {
+    width: 500px;
+}
+
+#video-container {
+    position: relative;
+    width: 600px;
+    margin: 15px;
+    margin-left: 200px;
+    display: inline-block;
+}
+
+#upload-container {
+    display: inline-block;
+    vertical-align: top;
+    width: 400px;
+}
+
+/*resize YouTube videos, from https://stackoverflow.com/questions/38026714/youtube-embed-dynamic-size-with-min-and-max-size*/
+.youtube-wrap {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    padding-bottom: 20px;
+  }
+.youtube-container {
+    overflow: hidden;
+    padding-bottom: 56.25%; /*change padding-top value to change size of container and hence shape of YouTube vid*/
+    position: relative;
+}
+iframe {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    /*height and width are 100% of the container it is in*/
+}
