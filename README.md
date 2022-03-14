@@ -7,7 +7,7 @@ It gives you an RPE estimate by calculates your velocity loss from your first fe
 Pull Up RPE was built with Python, Flask and Javascript. It uses Google's Video Intelligence API to detect your position in a video.
 
 ## Links
-Live at: https://pulluprpe.herokuapp.com/
+Live at: https://pullup.pythonanywhere.com
 
 Demo video: https://youtu.be/_w7fS19JpJA
 
