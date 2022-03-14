@@ -9,9 +9,9 @@ Pull Up RPE was built with Python, Flask and Javascript. It uses Google's Video 
 ## Links
 Live at: https://pulluprpe.herokuapp.com/
 
-Demo video: <URL HERE>
+Demo video: https://youtu.be/_w7fS19JpJA
 
-Video explaining code: <URL HERE>
+My process and code: https://youtu.be/Kzf6FE2zNsE
 
 
 ## Usage
